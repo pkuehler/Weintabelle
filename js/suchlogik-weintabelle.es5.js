@@ -1290,6 +1290,7 @@ if (term.virt === V_TRINKBAR) {
         currentPage = 1; renderPage();
     }
     window.applyFilter = applyFilter;
+	
 // ---- Minimal-Init für die pure Suchzeile (ohne Query-Builder/Chips) ----
 (function initPlainSearch(){
   var si = document.getElementById('searchInput');
