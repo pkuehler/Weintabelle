@@ -1290,7 +1290,32 @@ if (term.virt === V_TRINKBAR) {
         currentPage = 1; renderPage();
     }
     window.applyFilter = applyFilter;
-    
+// ---- Minimal-Init für die pure Suchzeile (ohne Query-Builder/Chips) ----
+(function initPlainSearch(){
+  var si = document.getElementById('searchInput');
+  if (!si) {
+    console.warn('[plain-search] #searchInput nicht gefunden.');
+    return;
+  }
+
+  // Sofort filtern beim Tippen
+  si.addEventListener('input', function(e){
+    var q = (e.target.value || '').trim();
+    try { window.applyFilter(q); } catch(e) { console.error('applyFilter failed', e); }
+  });
+
+  // Optional: Enter = filtern + Fokus lassen
+  si.addEventListener('keydown', function(e){
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      var q = (e.target.value || '').trim();
+      try { window.applyFilter(q); } catch(e) { console.error('applyFilter failed', e); }
+    }
+  });
+
+  // Beim Laden einmal initial filtern (z.B. leere Suche zeigt alles)
+  try { window.applyFilter((si.value || '').trim()); } catch(e) {}
+})();
     // ===== Sortierung / Paging / Render =====
     function clearAriaSort() {
         if (! thead) return;
