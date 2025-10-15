@@ -1,1 +1,72 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bordeaux-Kompass-Weintabelle – v1.5.0</title>
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
 
+  
+<!-- Such-Hilfe Button -->
+<div class="helpbar">
+  <button id="helpBtn" type="button" aria-haspopup="dialog" aria-controls="searchHelpDialog" aria-label="Such-Hilfe öffnen">💡 Such-Hilfe</button>
+</div>
+
+  <!-- Suchzeile -->
+  <div class="searchbar">
+    <input id="tableSearch" type="text" placeholder='z. B. jahr:2020 appellation:Pauillac bewertung:>=92' />
+    <button id="clearSearch" aria-label="Suche löschen">✕</button>
+  </div>
+
+  <div id="resultInfo">0 Châteaux/Weine gesamt</div>
+
+  <!-- Pager -->
+  <div id="pager">
+    <label for="pageSize" style="color:#555;">Zeilen pro Seite:</label>
+    <select id="pageSize">
+      <option value="10">10</option>
+      <option value="25" selected>25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="200">200</option>
+    </select>
+    <span id="pageInfo">Seite 1/1</span>
+    <div id="pageNumbers"></div>
+  </div>
+
+  <!-- Tabelle -->
+  <div class="table-wrap">
+    <table id="orders">
+  <!--    <caption><em>Beispiele: </em><code>appellation:=Pomerol UND (jahr:=2010 | jahr:=2015)</code>,
+        <code>region:linkes_ufer UND jahr:2010 UND (bewertung:89 | bewertung:90)</code></caption> -->
+      <colgroup><col><col><col><col><col><col></colgroup>
+      <thead>
+        <tr>
+          <th class="sortable" data-type="number">Jahrgang <span class="sort-indicator"></span></th>
+          <th class="sortable" data-type="string">Château <span class="sort-indicator"></span></th>
+          <th class="sortable" data-type="string">Appellation <span class="sort-indicator"></span></th>
+          <th class="sortable" data-type="number">Bewertung <span class="sort-indicator"></span></th>
+          <th class="sortable" data-type="string">Trinkreife <span class="sort-indicator"></span></th>
+          <th class="sortable" data-type="string">Anzahl <span class="sort-indicator"></span></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot><tr id="noResults" class="hidden"><td colspan="6">Keine Treffer.</td></tr></tfoot>
+    </table>
+  </div>
+  
+
+
+  <!-- Reihenfolge wichtig -->
+  <script src="JS/suchlogik-weintabelle.es5.js" defer></script>
+  <!-- <script src="JS/scope-chips.es5.js" defer></script>
+  <script src="JS/query-builder.es5.js" defer></script> -->
+  <script src="JS/such-hilfe.es5.js"></script>
+  <script src="JS/data-demo.js" defer></script>
+  
+  <script src="../ver-admin.es5.js" defer></script>
+
+</body>
+</html>
