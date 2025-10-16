@@ -133,7 +133,19 @@
         var key = canon(String(raw)).replace(/\s+/g, '_');
         return key === 'linkes_ufer' || key === 'rechtes_ufer' || key === 'cotes' || key === 'satelliten';
     }
-    
+    function regionKeyFromRaw(raw) {
+  // wie isRegionKey – nur als Helper, toleriert Case/Diakritik/Leerzeichen
+  return canon(String(raw)).replace(/\s+/g, '_');
+}
+
+function rowInRegionByKey(rowIndex, regionKey) {
+  var key = regionKeyFromRaw(regionKey);
+  var set = REGION_MAP[key]; // z.B. linkes_ufer, rechtes_ufer, cotes, satelliten
+  if (!set) return false;
+  // appCanon[r] ist die kanonisierte Appellation zu data[r], Spalte 2
+  var ac = appCanon[rowIndex] || '';
+  return inRegionSet(set, ac);
+}
     // ===== REGION_MAP als Plain-Object (ES5) =====
     var REGION_MAP = (function () {
         function setFrom(arr) {
